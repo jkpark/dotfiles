@@ -1,0 +1,60 @@
+#!/bin/bash
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+BASE=$(pwd)
+source $BASE/bin/my_util.sh
+
+install() {
+	[[ -e $1 ]] || { echo "Fail to install"; return; }
+	source $1
+	read -p "Install $TITLE? (y/n)" yn
+	[[ $yn == "y" ]] || return
+
+	if [ $(has_requirements) -eq 0 ]; then
+		if [ $__NEED_SUDO -eq 0 ] || [ has_sudo ]; then 
+			install_requirements
+		else
+			echo "Installing $TITLE requires root privilege."
+			echo "But you are not in sudoers. Skipped to install $TITLE"
+			return
+		fi
+	fi
+
+	ins
+
+}
+
+install_all() {
+	NEED_REBOOT=0
+	NEED_RELOGIN=0
+	for i in install+*; do
+		install $i
+	done
+}
+
+print_items() {
+	for i in install+*; do
+		echo ${i#install+*}
+	done
+}
+
+usage() {
+	echo "Usage : install [options]"
+	echo ""
+	echo "    -a           Install all items"
+	echo "    -i <ITEM>    Install item"
+	echo "    -l           Print available items"
+	echo ""
+}
+
+case $1 in
+	-a) install_all; ;;
+	-i) install install+$2; ;;
+	-l) print_items; exit 0; ;;
+	*) usage; exit 1; ;;
+esac
+
+echo "=============================="
+echo " Install Finished."
+echo " To apply changes need to re-login."
+echo "=============================="
+

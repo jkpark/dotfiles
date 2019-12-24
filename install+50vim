@@ -1,0 +1,36 @@
+#!/bin/bash
+TITLE="Vim"
+
+# echo 0 --> signal of install requirements
+# echo 1 --> signal of requirements are already installed 
+has_requirements() {
+	echo 1
+}
+
+# be called if has_requirements() echoes 0.
+__NEED_SUDO=1
+install_requirements() {
+	:
+}
+
+__NEED_REBOOT=0
+__NEED_RELOGIN=0
+ins() {
+	mkdir -pv bak
+	[ -f ~/.vimrc ] && mv -v ~/.vimrc bak/.vimrc
+	[ -d ~/.vim ] && mv -v ~/.vim bak/.vim
+	cp -v $BASE/vimrc ~/.vimrc
+
+	# for coc.vim
+	curl -sL install-node.now.sh/lts | bash -s -- --prefix=$HOME/.local --verbose
+
+	mkdir -p ~/.vim/autoload
+
+	source ~/.bash_profile
+	export GIT_SSL_NO_VERIFY=true
+	mkdir -p ~/.vim/autoload
+	curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+
+	vim +PlugClean +qall
+	vim +PlugInstall +qall
+}

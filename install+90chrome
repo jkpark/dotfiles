@@ -1,0 +1,35 @@
+#!/bin/bash
+TITLE="Google Chrome"
+
+# echo 0 --> signal of install requirements
+# echo 1 --> signal of requirements are already installed 
+has_requirements() {
+	if [ $(is_pkg_installed google-chrome-stable) -eq 0 ]; then
+		echo 0
+		return
+	fi
+	if [ $(is_pkg_installed libnss3-tools) -eq 0 ]; then
+		echo 0
+		return
+	fi
+	echo 1
+}
+
+# be called if has_requirements() echoes 0.
+__NEED_SUDO=1
+install_requirements() {
+	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/google-chrome.list
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+	sudo apt-get update
+	sudo apt-get install -y google-chrome-stable libnss3-tools
+}
+
+__NEED_REBOOT=0
+__NEED_RELOGIN=0
+ins() {
+	echo "Execute Google-Chrome once will generate it's database."
+	echo "If you use proxy and have certification,"
+	echo " Run ./bin/import-cert-browser"
+	echo " will import your certification into browser's database."
+	echo ""
+}

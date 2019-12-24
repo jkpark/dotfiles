@@ -1,0 +1,20 @@
+#!/bin/bash
+TITLE="Template"
+
+# echo 0 --> signal of install requirements
+# echo 1 --> signal of requirements are already installed 
+has_requirements() {
+	echo 1
+}
+
+# be called if has_requirements() echoes 0.
+__NEED_SUDO=1
+install_requirements() {
+	:
+}
+
+__NEED_REBOOT=0
+__NEED_RELOGIN=0
+ins() {
+	:
+}

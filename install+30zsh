@@ -1,0 +1,40 @@
+#!/bin/bash
+TITLE="Zsh"
+
+# echo 0 --> signal of install requirements
+# echo 1 --> signal of requirements are already installed 
+has_requirements() {
+	if [ $(is_pkg_installed zsh) -eq 0 ]; then
+		echo 0
+		return
+	fi
+	echo 1
+}
+
+# be called if has_requirements() echoes 0.
+__NEED_SUDO=1
+install_requirements() {
+	sudo apt-get install -y zsh
+}
+
+__NEED_REBOOT=0
+__NEED_RELOGIN=0
+ins() {
+	echo "Installing oh-my-zsh"
+	if git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh; then
+		echo "Installed OH-MY-ZSH"
+	fi
+
+	echo "Install plugins..."
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+	git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+	cp -v $BASE/zshrc ~/.zshrc
+	cp -v $BASE/p10k.zsh ~/.p10k.zsh
+
+	if [ `echo $SHELL` != $(which zsh) ]; then
+		echo "change shell to zsh. need confirm."
+		chsh -s $(which zsh)
+	fi
+}
