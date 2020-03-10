@@ -20,6 +20,17 @@ has_sudo() {
 }
 
 is_pkg_installed() {
+    while [ -n "$1" ]; do
+        if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+            echo 0
+            return
+        fi
+        shift
+    done
+    echo 1
+}
+
+is_pkg_installed_old() {
 	if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 		echo 0
 		return

@@ -4,11 +4,7 @@ TITLE="Gnome"
 # echo 0 --> signal of install requirements
 # echo 1 --> signal of requirements are already installed 
 has_requirements() {
-	if [ $(is_pkg_installed gnome-tweaks) -eq 0 ] || [ $(is_pkg_installed gnome-shell-extensions) -eq 0 ]; then
-		echo 0
-		return
-	fi
-	echo 1
+    echo $(is_pkg_installed gnome-tweaks gnome-shell-extensions)
 }
 
 # be called if has_requirements() echoes 0.

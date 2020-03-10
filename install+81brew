@@ -1,0 +1,26 @@
+#!/bin/bash
+TITLE="Homebrew"
+
+# echo 0 --> signal of install requirements
+# echo 1 --> signal of requirements are already installed 
+has_requirements() {
+    echo $(is_pkg_installed build-essential curl file git)
+}
+
+# be called if has_requirements() echoes 0.
+__NEED_SUDO=1
+install_requirements() {
+    echo "Installing requirements : build-essential curl file git"
+    sudo apt-get install build-essential curl file git
+}
+
+__NEED_REBOOT=0
+__NEED_RELOGIN=0
+ins() {
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    
+test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+}
