@@ -54,4 +54,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.aliases ] && source ~/.aliases
 
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+
 setopt MENU_COMPLETE
