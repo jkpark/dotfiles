@@ -54,10 +54,12 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.aliases ] && source ~/.aliases
 
+# Insert and Home key
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 
-setopt MENU_COMPLETE
+#
+#setopt MENU_COMPLETE
 
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 # https://gist.github.com/magicdude4eva/2d4748f8ef3e6bf7b1591964c201c1ab

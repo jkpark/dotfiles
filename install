@@ -20,7 +20,6 @@ install() {
 	fi
 
 	ins
-
 }
 
 install_all() {
@@ -55,6 +54,5 @@ esac
 
 echo "=============================="
 echo " Install Finished."
-echo " To apply changes need to re-login."
 echo "=============================="
 

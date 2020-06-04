@@ -12,7 +12,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 "let g:undotree_WindowLayout = 2
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -72,7 +73,8 @@ set sidescrolloff=5         " the number of columns to keep left and right of th
 
 " Indention Options
 set autoindent              " new lines inherit the dentation of prev lines.
-"set expandtab              " convert tabs to spaces
+set cindent
+set expandtab              " convert tabs to spaces
 set tabstop=4               " tab space
 set shiftwidth=4            " Shift Width
 
@@ -94,6 +96,8 @@ set backspace=eol,start,indent " backspace continue
 "set spell                   " enable spell check
 filetype plugin on
 
+"write as root
+cmap w!! w !sudo tee > /dev/null %
 
 " ----- 80 chars/line -----
 "set textwidth=0

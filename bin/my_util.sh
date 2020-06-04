@@ -1,4 +1,11 @@
 #!/bin/bash
+
+git_clone_or_pull () {
+    REPOSRC=$1
+    LOCALREPO=$2
+    [[ $# -eq 1 ]] && echo "git clone or pull failed : No dest dir" >&2 && return
+    git clone "$REPOSRC" "$LOCALREPO" >&2  || git -C "$LOCALREPO" pull >&2
+}
 is_root () {
 	return $(id -u)
 }
