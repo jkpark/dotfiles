@@ -48,7 +48,7 @@ endif
 " General
 " ====================
 if !has('gui_running')
-	set t_Co=256
+    set t_Co=256
 endif
 
 " Interface Options
@@ -74,7 +74,7 @@ set sidescrolloff=5         " the number of columns to keep left and right of th
 " Indention Options
 set autoindent              " new lines inherit the dentation of prev lines.
 set cindent
-set expandtab              " convert tabs to spaces
+"set expandtab              " convert tabs to spaces
 set tabstop=4               " tab space
 set shiftwidth=4            " Shift Width
 

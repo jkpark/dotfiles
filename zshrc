@@ -2,10 +2,11 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
+[[ "$TERM" == "xterm" ]] && export TERM=xterm-256color
 
 ZSH_THEME=powerlevel10k/powerlevel10k
 
@@ -34,10 +35,10 @@ HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 plugins=(
-	git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-	systemd
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    systemd
 )
 
 source $ZSH/oh-my-zsh.sh
