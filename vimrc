@@ -73,8 +73,8 @@ set sidescrolloff=5         " the number of columns to keep left and right of th
 
 " Indention Options
 set autoindent              " new lines inherit the dentation of prev lines.
-set cindent
-"set expandtab              " convert tabs to spaces
+"set cindent
+set expandtab              " convert tabs to spaces
 set tabstop=4               " tab space
 set shiftwidth=4            " Shift Width
 
@@ -104,6 +104,19 @@ cmap w!! w !sudo tee > /dev/null %
 "if exists('&colorcolumn')
 "  set colorcolumn=80
 "endif
+
+
+" ----- disable indent when paste -----
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+
+
 
 " ====================
 " Mappings
