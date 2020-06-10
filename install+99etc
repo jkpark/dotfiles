@@ -18,13 +18,13 @@ __NEED_RELOGIN=0
 ins() {
 	mkdir -pv bak
 	for dotfile in gitconfig; do
-		[ -e ~/."$dotfile" ] && mv -v ~/."$dotfile" bak/"$dotfile"
-		cp -v "$BASE/$dotfile" ~/."$dotfile"
+		[ -e ~/."$dotfile" ] && [ ! -L ~/."$dotfile" ] && mv -v ~/."$dotfile" bak/"$dotfile"
+		ln -sfv "$BASE/$dotfile" ~/."$dotfile"
 	done
 
 	# scripts
 	mkdir -p ~/.local/bin
 	for bin in bin/*; do
-		cp -v "$BASE/$bin" ~/.local/bin/
+		ln -sfv "$BASE/$bin" ~/.local/bin/
 	done
 }
