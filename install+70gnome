@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/scripts/bash
 TITLE="Gnome"
 
 # echo 0 --> signal of install requirements
@@ -47,14 +47,14 @@ install_gnome_extensions() {
 	echo "installing gnome extensions..."
 	echo "=============================="
 	# Applications Menu
-	#./bin/gnomeshell-extension-manage --install --extension-id 6 
+	#./scripts/gnomeshell-extension-manage --install --extension-id 6 
 	# removeable drive menu
-	./bin/gnomeshell-extension-manage --install --extension-id 7 
+	./scripts/gnomeshell-extension-manage --install --extension-id 7 
 	# coverflow alt-tab
-	./bin/gnomeshell-extension-manage --install --extension-id 97 
+	./scripts/gnomeshell-extension-manage --install --extension-id 97 
 	# System monitor
 	if [ $(chk_and_ins_pkgs gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gir1.2-clutter-1.0) ]; then
-		./bin/gnomeshell-extension-manage --install --extension-id 120
+		./scripts/gnomeshell-extension-manage --install --extension-id 120
 		gsettings --schemadir ~/.local/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/ set org.gnome.shell.extensions.system-monitor icon-display false
 		gsettings --schemadir ~/.local/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/ set org.gnome.shell.extensions.system-monitor move-clock true 
 		gsettings --schemadir ~/.local/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/ set org.gnome.shell.extensions.system-monitor center-display true
@@ -77,18 +77,18 @@ install_gnome_extensions() {
 	fi
 
 	# Dash to dock
-	./bin/gnomeshell-extension-manage --install --extension-id 307
+	./scripts/gnomeshell-extension-manage --install --extension-id 307
 	gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 	gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 
 	# coffeine
-	./bin/gnomeshell-extension-manage --install --extension-id 517 
+	./scripts/gnomeshell-extension-manage --install --extension-id 517 
 	# Weather
-	#./bin/gnomeshell-extension-manage --install --extension-id 750
+	#./scripts/gnomeshell-extension-manage --install --extension-id 750
 	# clipboard indicator
-	./bin/gnomeshell-extension-manage --install --extension-id 779 
+	./scripts/gnomeshell-extension-manage --install --extension-id 779 
 	# Bing Wallpaper Changer
-	./bin/gnomeshell-extension-manage --install --extension-id 1262
+	./scripts/gnomeshell-extension-manage --install --extension-id 1262
 }
 
 

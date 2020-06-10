@@ -1,7 +1,7 @@
 #!/bin/bash
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 BASE=$(pwd)
-source $BASE/bin/my_util.sh
+source $BASE/scripts/my_util.sh
 
 install() {
 	[[ -e $1 ]] || { echo "Fail to install"; return; }

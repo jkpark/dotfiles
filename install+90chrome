@@ -21,7 +21,7 @@ __NEED_RELOGIN=0
 ins() {
 	echo "Execute Google-Chrome once will generate it's database."
 	echo "If you use proxy and have certification,"
-	echo " Run ./bin/import-cert-browser"
+	echo " Run ./scripts/import-cert-browser"
 	echo " will import your certification into browser's database."
 	echo ""
 }
