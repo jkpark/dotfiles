@@ -1,5 +1,4 @@
 #!/bin/bash
-DEST_DIR="."
 error() { echo "$1" >&2; exit 1; }
 verbose() { [[ $VERBOSE ]] && echo "$1" >&2; }
 ask() {
@@ -17,11 +16,15 @@ ask() {
 usage() {
     echo "Backup Util by jkpark"
     echo ""
-    echo "Usage $(basename $0) [OPTION]... TARRGET..."
+    echo "Usage $(basename $0) [OPTION] [command] TARRGET..."
     echo ""
+    echo "OPTIONS:"
     echo "    -d dir      backup to selected directory"
     echo "    -f          Force. do not prompt before execution"
     echo "    -v          explain what is being done"
+    echo ""
+    echo "command:"
+    echo "    -rm-all     Remove All backups"
     echo ""
 }
 
@@ -29,8 +32,7 @@ while getopts ":fvd:" opt; do
     case "$opt" in
         f) FORCE=1 ;;
         v) VERBOSE="-v" ;;
-        d) DIR=$OPTARG ;;
-        *) echo "error !!!" >&2
+        *) echo "Wrong Option!" >&2
             usage
             exit 1
     esac
@@ -39,22 +41,28 @@ done
 shift $((OPTIND - 1))
 
 # Check that any targets after parsing opts
-if [ $# = 0 ] ; then
+if [ $# == 0 ] ; then
 	usage
 	exit 1
 fi
 
-# set dest dir
-if [[ -n $DIR ]]; then
-    [[ ! -d "$DIR" ]] && { [[ -n $FORCE ]] && mkdir -vp $DIR || error "Fail to set directory."; }
-    DEST_DIR=$DIR
+DEST="$1.bak"
+[[ $# == 2 ]] && DEST="$2/$1.bak"
+
+
+if [[ -f $DEST ]] || [[ -d $DEST ]]; then
+    if [[ ! $FORCE ]]; then
+        NEXT=2
+        while [[ -f $DEST$NEXT ]] || [[ -d $DEST$NEXT ]]; do
+            ((NEXT++))
+        done
+        DEST=$DEST$NEXT
+    else # FORED! Remove.
+        rm -rf $VERBOSE $DEST
+    fi 
 fi
 
-for file in "$@"
-do
-    if [[ -f $DEST_DIR/$(basename $file).bak ]]; then
-        [[ -n $FORCE ]] || { ask "$DEST_DIR/$(basename $file).bak is already exist. override?"; [[ $? -eq 0 ]] && continue; } 
-    fi
-    cp $VERBOSE $file $DEST_DIR/$(basename $file).bak
-done
+[[ ! $VERBOSE ]] && echo "$1 -> $DEST"
+
+cp -fr $VERBOSE $1 $DEST
 
