@@ -110,7 +110,7 @@ install_required_pkg() {
 	apt-get autoremove -y
 	apt-get install -y git vim curl openssh-server exuberant-ctags 
 	apt-get install -y snapd
-	snap install lsd --devmode
+	#snap install lsd --devmode
 }
 
 
