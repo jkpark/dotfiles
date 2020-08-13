@@ -20,6 +20,7 @@ ins() {
 	mkdir -p bak
 	[ -f ~/.$FILE ] && mv -v ~/.$FILE bak/$FILE
 	cp -v $BASE/$FILE ~/.$FILE
+    source ~/.aliases
 
 	update_config=1
 	file_name="~/.$FILE"

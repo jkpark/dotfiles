@@ -22,7 +22,7 @@ let g:airline_theme='hybrid'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "close vim if only NERDTree open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'

@@ -16,11 +16,11 @@ install_requirements() {
 __NEED_REBOOT=0
 __NEED_RELOGIN=0
 ins() {
-	mkdir -p ~/.fonts
-	cp ./fonts/D2Coding/* ~/.fonts
+	mkdir -p ~/.local/share/fonts
+	cp ./fonts/D2Coding/* ~/.local/share/fonts/
 	fc-cache
 
-	if [ -e ~/.fonts/D2Coding Nerd Font Complete.ttf ]; then
+	if [ -e "~/.local/share/fonts/D2Coding Nerd Font Complete.ttf" ]; then
 		gsettings set org.gnome.desktop.wm.preferences titlebar-font 'D2Coding Nerd Font Bold 13'
 		gsettings set org.gnome.desktop.interface font-name 'D2Coding Nerd Font 11'
 		gsettings set org.gnome.desktop.interface document-font-name 'D2Coding Nerd Font 11'

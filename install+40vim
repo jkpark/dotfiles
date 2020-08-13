@@ -4,31 +4,31 @@ TITLE="Vim"
 # echo 0 --> signal of install requirements
 # echo 1 --> signal of requirements are already installed 
 has_requirements() {
-	echo 1
+    echo $(is_pkg_installed nodejs)
 }
 
 # be called if has_requirements() echoes 0.
 __NEED_SUDO=1
 install_requirements() {
-	:
+    sudo apt-get install -y nodejs
 }
 
 __NEED_REBOOT=0
 __NEED_RELOGIN=0
 ins() {
-    if [ ! -L ~/.vimrc ] ; then
-        echo "backup vimrc..." >&2
-        mkdir -pv bak
-        mv -v ~/.vimrc bak/vimrc
-        mv -v ~/.vim bak/vim
-    fi
+	if [ ! -L ~/.vimrc ] ; then
+		echo "backup vimrc..." >&2
+		mkdir -pv bak
+		mv -v ~/.vimrc bak/vimrc
+		mv -v ~/.vim bak/vim
+	fi
 
-    echo "Install vim from ppa:jonathonf/vim"
-    sudo add-apt-repository ppa:jonathonf/vim
-    sudo apt update
-    sudo apt install vim
-    echo "To restore Vim to the stock version"
-    echo "sudo apt install ppa-purge && sudo ppa-purge ppa:jonathonf/vim"
+	#echo "Install vim from ppa:jonathonf/vim"
+	#sudo add-apt-repository ppa:jonathonf/vim
+	#sudo apt update
+	#sudo apt install vim
+	#echo "To restore Vim to the stock version"
+	#echo "sudo apt install ppa-purge && sudo ppa-purge ppa:jonathonf/vim"
 
 	ln -sfv $BASE/vimrc ~/.vimrc
 

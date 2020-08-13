@@ -109,7 +109,9 @@ install_required_pkg() {
 	apt-get upgrade -y
 	apt-get autoremove -y
 	apt-get install -y git vim curl openssh-server exuberant-ctags 
-	apt-get install -y snapd
+    
+    #check https://github.com/Peltoche/lsd#installation
+	#apt-get install -y snapd
 	#snap install lsd --devmode
 }
 

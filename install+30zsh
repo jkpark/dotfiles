@@ -16,6 +16,18 @@ install_requirements() {
 __NEED_REBOOT=0
 __NEED_RELOGIN=0
 ins() {
+	echo "Install zplug..."
+	curl -ksL https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	
+	ln -sfv $BASE/zshrc ~/.zshrc
+
+	if [ `echo $SHELL` != $(which zsh) ]; then
+		echo "change shell to zsh. need confirm."
+		chsh -s $(which zsh)
+	fi
+
+}
+ins_1804() {
 	echo "Installing oh-my-zsh"
 	if git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh; then
 		echo "Installed OH-MY-ZSH"
