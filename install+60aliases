@@ -18,7 +18,7 @@ __NEED_RELOGIN=0
 ins() {
 	FILE="aliases"
 	mkdir -p bak
-	[ -f ~/.$FILE ] && mv -v ~/.$FILE bak/$FILE
+	[ -f ~/.$FILE ] && [ ! -L ~/."$FILE" ] && mv -v ~/.$FILE bak/$FILE
 	cp -v $BASE/$FILE ~/.$FILE
     source ~/.aliases
 
