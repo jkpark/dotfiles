@@ -11,6 +11,8 @@ zplug "zsh-users/zsh-syntax-highlighting"
 #
 zplug "zsh-users/zsh-autosuggestions"
 
+# directory listing more readable
+zplug "supercrabtree/k"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -21,15 +23,21 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load
 
 ############################################################################
+
+# autojump
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
 
 export PATH=$HOME/.local/bin:$PATH
 
 [[ "$TERM" == "xterm" ]] && export TERM=xterm-256color
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 [ -f ~/.aliases ] && source ~/.aliases
 
 # Insert and Home key
@@ -52,3 +60,8 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
 
+
+# automatically start tmux when ssh(only ssh)
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+  tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+fi
