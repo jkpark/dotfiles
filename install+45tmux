@@ -1,5 +1,5 @@
 #!/bin/bash
-TITLE="Vim"
+TITLE="Tmux"
 
 # echo 0 --> signal of install requirements
 # echo 1 --> signal of requirements are already installed 

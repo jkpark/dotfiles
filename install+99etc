@@ -21,7 +21,4 @@ ins() {
 		[ -e ~/."$dotfile" ] && [ ! -L ~/."$dotfile" ] && mv -v ~/."$dotfile" bak/"$dotfile"
 		ln -sfv "$BASE/$dotfile" ~/."$dotfile"
 	done
-
-
-    echo "autojump : https://github.com/wting/autojump"
 }
