@@ -14,9 +14,6 @@ zplug "zsh-users/zsh-autosuggestions"
 # directory listing more readable
 zplug "supercrabtree/k"
 
-
-zplug "wting/autojump"
-
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -29,7 +26,7 @@ fi
 zplug load
 
 ############################################################################
-#
+
 [ -f ~/.shrc ] && source ~/.shrc
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

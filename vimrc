@@ -11,34 +11,28 @@ call plug#begin()
 " color scheme
 Plug 'junegunn/seoul256.vim'
 
+Plug 'Yggdroot/indentLine'
 
-" Vim Utilities
+
+"Plug 'scrooloose/nerdcommenter'
+" Add spaces after comment delimiters by default
+"let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+"let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+"let g:NERDTrimTrailingWhitespace = 1
+
 
 "Plug 'junegunn/goyo.vim'
 "Plug 'junegunn/limelight.vim'
 
+
+"
+Plug 'wting/autojump', { 'dir': '~/autojump.git', 'do': './install.py' }
+
 " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-"Plug 'AndrewRadev/splitjoin.vim'
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
-nnoremap gss :SplitjoinSplit<cr>
-nnoremap gsj :SplitjoinJoin<cr>
-
-
-Plug 'Yggdroot/indentLine'
-
-Plug 'scrooloose/nerdcommenter'
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-" customize keymapping
-map <C-/> <plug>NERDComComment
 
 
 " this plugin requires nodejs 
