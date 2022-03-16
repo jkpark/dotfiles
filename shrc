@@ -1,0 +1,3 @@
+# This shrc is for bash and zsh both
+
+export PATH=$HOME/.local/bin:$PATH

@@ -1,18 +1,53 @@
-" 2019-12-04    jkpark (https://jkpark.github.io)
+" 2022-03-16    jkpark (https://jkpark.github.io)
+
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+
 silent! if plug#begin('~/.vim/plugged')
 
 let $GIT_SSL_NO_VERIFY = 'true'
 
+" color scheme
 Plug 'junegunn/seoul256.vim'
+
 "Plug 'junegunn/goyo.vim'
+
 "Plug 'junegunn/limelight.vim'
-Plug 'junegunn/fzf', { 'do': './install --all' }
+
+" command-line fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'AndrewRadev/splitjoin.vim'
-"let g:undotree_WindowLayout = 2
+
+"Plug 'AndrewRadev/splitjoin.vim'
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+nnoremap gss :SplitjoinSplit<cr>
+nnoremap gsj :SplitjoinJoin<cr>
+
+
 Plug 'Yggdroot/indentLine'
+
 Plug 'scrooloose/nerdcommenter'
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" customize keymapping
+map <C-/> <plug>NERDComComment
+
+
+" this plugin requires nodejs 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'vim-airline/vim-airline'
@@ -66,7 +101,7 @@ set cursorline              " Highlight the line currently under cursor.
 
 " Text Rendering Options
 set fencs=utf-8,euc-kr,cp949,cp932,big5,latin1,urs-2le,shift-jis,euc-jp
-"set encoding=utf-8
+set encoding=UTF-8
 "set fileencoding=utf-8
 set scrolloff=5             " the number of lines to keep above and below the cursor
 set sidescrolloff=5         " the number of columns to keep left and right of the cursor
@@ -207,14 +242,6 @@ autocmd FileType sh             set tags+=.tags_sh,$HOME/.vim/tags/sh
 " ====================
 " Plugins
 " ====================
-" --------------------
-" splitjoin
-" --------------------
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
-nnoremap gss :SplitjoinSplit<cr>
-nnoremap gsj :SplitjoinJoin<cr>
-
 " --------------------
 " coc.vim 
 " --------------------
