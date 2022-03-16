@@ -66,7 +66,10 @@ sudo apt install -q -y nodejs
 
 # vim
 print_status "Install vim ..."
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sfv $BASE/vimrc ~/.vimrc
+vim +PlugInstall +qall
 
 
 # tmux

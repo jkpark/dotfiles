@@ -1,30 +1,24 @@
 " 2022-03-16    jkpark (https://jkpark.github.io)
 
-" Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
 
-silent! if plug#begin('~/.vim/plugged')
-
-let $GIT_SSL_NO_VERIFY = 'true'
+call plug#begin()
 
 " color scheme
 Plug 'junegunn/seoul256.vim'
 
-"Plug 'junegunn/goyo.vim'
 
+" Vim Utilities
+
+"Plug 'junegunn/goyo.vim'
 "Plug 'junegunn/limelight.vim'
 
 " command-line fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "Plug 'AndrewRadev/splitjoin.vim'
@@ -77,7 +71,6 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 call plug#end()
-endif
 
 " ====================
 " General
@@ -85,9 +78,8 @@ endif
 if !has('gui_running')
     set t_Co=256
 endif
-
-" Interface Options
 colorscheme seoul256
+" Interface Options
 set number                  " display line numbers on the left
 "set lines=50 columns=120   " console mode
 set laststatus=2            " Always display the status bar

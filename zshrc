@@ -29,8 +29,10 @@ fi
 zplug load
 
 ############################################################################
+#
 [ -f ~/.shrc ] && source ~/.shrc
 [ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # autojump
