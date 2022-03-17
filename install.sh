@@ -32,7 +32,7 @@ appendStr() {
 
 
 sudo apt -q update
-sudo apt install -q -y git vim curl openssh-server exuberant-ctags
+sudo apt install -q -y git vim curl openssh-server exuberant-ctags python
 
 
 
