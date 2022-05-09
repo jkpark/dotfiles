@@ -3,3 +3,10 @@
 	email = jkpark.r@gmail.com
 	signingkey = 89B2C9DD8F2CC669
 
+[alias]
+	del = branch -D
+	new = "!f() { git cd main && git checkout -b $1; }; f"
+	cd = checkout
+	ls = branch
+	st = status -s -b
+	fp = "!f() { git fetch && git pull; }; f"
