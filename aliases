@@ -1,3 +1,6 @@
+alias h='history'
+alias c='clear'
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
