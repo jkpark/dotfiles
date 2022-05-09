@@ -27,9 +27,6 @@ Plug 'Yggdroot/indentLine'
 "Plug 'junegunn/limelight.vim'
 
 
-"
-Plug 'wting/autojump', { 'dir': '~/autojump.git', 'do': './install.py' }
-
 " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
