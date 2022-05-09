@@ -11,6 +11,9 @@ zplug "zsh-users/zsh-syntax-highlighting"
 #
 zplug "zsh-users/zsh-autosuggestions"
 
+#
+zplug "plugins/autojump", from:oh-my-zsh
+
 # directory listing more readable
 zplug "supercrabtree/k"
 
@@ -26,6 +29,17 @@ fi
 zplug load
 
 ############################################################################
+
+setopt AUTOCD
+HISTFILE="${HOME}/.zhistory"
+SAVEHIST=5000
+HISTSIZE=5000
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history
 
 [ -f ~/.shrc ] && source ~/.shrc
 [ -f ~/.aliases ] && source ~/.aliases
