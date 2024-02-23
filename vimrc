@@ -2,7 +2,7 @@
 
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
+\| PlugInstall --sync | source $MYVIMRC
 \| endif
 
 
@@ -11,8 +11,7 @@ call plug#begin()
 " color scheme
 Plug 'junegunn/seoul256.vim'
 
-Plug 'Yggdroot/indentLine'
-
+"Plug 'Yggdroot/indentLine'
 
 "Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
@@ -22,10 +21,8 @@ Plug 'Yggdroot/indentLine'
 " Enable trimming of trailing whitespace when uncommenting
 "let g:NERDTrimTrailingWhitespace = 1
 
-
 "Plug 'junegunn/goyo.vim'
 "Plug 'junegunn/limelight.vim'
-
 
 " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -33,7 +30,7 @@ Plug 'junegunn/fzf.vim'
 
 
 " this plugin requires nodejs 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -67,7 +64,7 @@ call plug#end()
 " General
 " ====================
 if !has('gui_running')
-    set t_Co=256
+	set t_Co=256
 endif
 colorscheme seoul256
 " Interface Options
@@ -84,7 +81,7 @@ set cursorline              " Highlight the line currently under cursor.
 
 " Text Rendering Options
 set fencs=utf-8,euc-kr,cp949,cp932,big5,latin1,urs-2le,shift-jis,euc-jp
-set encoding=UTF-8
+"set encoding=UTF-8
 "set fileencoding=utf-8
 set scrolloff=5             " the number of lines to keep above and below the cursor
 set sidescrolloff=5         " the number of columns to keep left and right of the cursor
@@ -129,12 +126,10 @@ let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
+	set pastetoggle=<Esc>[201~
+	set paste
+	return ""
 endfunction
-
-
 
 " ====================
 " Mappings
@@ -155,7 +150,6 @@ inoremap <C-k> <C-o>k
 
 " qq to record, Q to replay
 nnoremap Q @q
-
 
 " Windows style select all
 nnoremap <C-a> gg<S-v>G
