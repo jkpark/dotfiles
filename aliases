@@ -1,5 +1,6 @@
 alias h='history'
 alias c='clear'
+alias mkdir='mkdir -p'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -13,7 +14,7 @@ alias .5='cd ../../../../..'
 alias sl='ls'
 alias ls='ls --color=auto'
 #lsd &> /dev/null && alias ls='lsd --group-dirs first'
-lsd &> /dev/null && alias ls='lsd'
+lsd &>/dev/null && alias ls='lsd'
 alias l='ls -alh'
 alias ll='ls -alh'
 alias lst='lsd --tree'
@@ -21,10 +22,13 @@ alias slt='lsd --tree'
 
 alias mkdir='mkdir -pv'
 
-alias diff='diff --color=auto'
+#alias diff='diff --color=auto'
 
 alias pstree='ps xawf -eo pid,user,cgroup,args'
 
 alias glog="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset) %C(white)%s%C(reset) %C(bold white)<%an>%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=short"
 alias gst='git status -sb'
+alias gdall='git branch | grep -v "main" | xargs git branch -D'
+alias gm='git cd main'
 
+alias ts='tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux'
