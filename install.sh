@@ -29,85 +29,74 @@ appendStr() {
   set +e
 }
 
-unameOut="$(uname -s)"
-case "${unameOut}" in
-Darwin*)
-  machine=Mac
-  PKGMGR=brew
-  ;;
-*)
-  machine=Linux
-  PKGMGR=snap
-  ;;
+# determin OS. if it's MacOS or Linux.
+OS="$(uname -s)"
+case "$OS" in
+    Linux*)     MACHINE=Linux;;
+    Darwin*)    MACHINE=Mac;;
+    *)          MACHINE="UNKNOWN:${OS}"
 esac
-echo "Your system is ${machine}, Selected package manager is ${PKGMGR}"
+echo "Detected OS: $MACHINE"
 
-if [[ $machine == 'Linux' ]]; then
+if [[ $MACHINE == 'Linux' ]]; then
   sudo apt update
-  sudo apt install -q -y vim openssh-server exuberant-ctags curl git
+  sudo apt-get install -y unzip build-essential procps curl file git
+
+  # Install Homebrew on Linux
+  bash "$BASE/setup_brew.sh"
+elif [[ "$MACHINE" == "Mac" ]]; then
+    brew install curl git
+fi
+
+if ! command -v brew &> /dev/null; then
+    echo "Homebrew not found. Cannot continue."
+    exit 1
 fi
 
 # git
 ln -sfv "$BASE/gitconfig" ~/.gitconfig
 ln -sfv "$BASE/gitignore_global" ~/.gitignore_global
-
-print_status "Copy aliases..."
 ln -sfv $BASE/aliases ~/.aliases
+appendStr ~/.bashrc "[ -f ~/.aliases ] && source ~/.aliases"
 
-print_status "Copy shrc..."
-ln -sfv $BASE/shrc ~/.shrc
-appendStr ~/.bashrc "[ -f ~/.shrc ] && source ~/.shrc"
-appendStr ~/.zshrc "[ -f ~/.shrc ] && source ~/.shrc"
 
-# zsh
-print_status "Copy zshrc..."
+print_status "zsh, fzf, starship..."
+brew install zsh fzf starship
 ln -sfv $BASE/zshrc ~/.zshrc
+mkdir -p "$HOME/.config"
+ln -sfv "$BASE/starship.toml" "$HOME/.config/starship.toml"
 
-if [[ $machine == 'Linux' ]]; then
-  print_status "Install zsh..."
-  sudo apt install -q -y zsh
+# change shell
+# On some systems, chsh needs the path to be in /etc/shells
+if ! grep -q "$ZSH_PATH" /etc/shells; then
+    echo "Adding $ZSH_PATH to /etc/shells..."
+    echo "$ZSH_PATH" | sudo tee -a /etc/shells
 fi
-curl -ksL https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
 if [ $(echo $SHELL) != $(which zsh) ]; then
-  echo "changing login shell to zsh..."
-  chsh -s $(which zsh)
+    echo "changing login shell to zsh..."
+    sudo chsh -s "$ZSH_PATH" "$USER"
 fi
 
 # vim
-print_status "vimrc and vim plugins..."
+print_status "vim..."
+brew install vim;
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sfv $BASE/vimrc ~/.vimrc
 vim +PlugInstall +qall
 
 # tmux
-print_status "Install tmux ..."
-if [[ $machine == 'Linux' ]]; then
-  sudo apt install tmux
-elif [[ $machine == 'Mac' ]]; then
-  brew install tmux
-fi
+print_status "tmux ..."
+brew install tmux;
 ln -sfv $BASE/tmux.conf ~/.tmux.conf
 
 
 # nerd font
-if [[ $machine == 'Linux' ]]; then
+if [[ $MACHINE == 'Linux' ]]; then
   echo "Install DroidSansMono nerd font..."
-  wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DroidSansMono.zip
-  unzip DroidSansMono.zip -d ~/.local/share/fonts
-  rm DroidSansMono.zip
-  fc-cache -f
+  brew install --cask font-droid-sans-mono-nerd-font
 fi
 
 # bat
-if [[ $machine == 'Linux' ]]; then
-  sudo apt install bat
-  mkdir -p ~/.local/bin
-  ln -s /usr/bin/batcat ~/.local/bin/bat
-elif [[ $machine == 'Mac' ]]; then
-  brew install bat
-fi
+brew install bat
 
-# nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
