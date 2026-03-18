@@ -15,8 +15,7 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Source aliases
 [ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.aliases.samsung ] && source ~/.aliases.samsung
-[ -f ~/.env.sec ] && source ~/.env.sec
+[ -f ~/.env.work ] && source ~/.env.work
 
 
 # automatically start tmux when ssh(only ssh)
