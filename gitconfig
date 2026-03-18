@@ -1,8 +1,5 @@
-[user]
-	name = jkpark
-	email = jkpark.r@gmail.com
-
 [alias]
+    s = status -sb
 	del = branch -D
 	new = "!f() { git cd main && git checkout -b $1; }; f"
 	cd = checkout
