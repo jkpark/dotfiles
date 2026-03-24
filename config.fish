@@ -17,11 +17,8 @@ function envsource
     if not string match -qr '^#|^$' "$line"
       set item (string split -m 1 '=' $line)
       set -gx $item[1] $item[2]
-      if test -n "\$$item[2]"
-        set -gx $item[1] $item[2]
-      end
     end
-  end < "$envfile"
+  end < $envfile
 end
 
 function gituser
@@ -44,12 +41,12 @@ function gituser
     end
 end
 
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
-
 [ -f ~/.aliases ] && source ~/.aliases
-
-# test -f ~/.env && envsource ~/.env
+test -f ~/.env && envsource ~/.env
 test -f ~/.env.work && envsource ~/.env.work
+
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
 
 starship init fish | source
 mise activate fish | source
+

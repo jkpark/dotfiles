@@ -11,6 +11,7 @@ $nodejs\
 $rust\
 $golang\
 $php\
+$python\
 [](fg:#212736 bg:#1d2230)\
 $time\
 [ ](fg:#1d2230)\
@@ -62,3 +63,14 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[python]
+symbol = "🐍"
+style = "bg:#212736"
+# The format string uses the $virtualenv variable to display the active venv
+format = '[[ ${symbol}${py_version} (\($virtualenv\))](fg:#769ff0 bg:#212736)]($style)'
+
+# Optional: If you ONLY want the python module to appear when a venv is active
+# (By default, Starship also shows it if it finds files like pyproject.toml or requirements.txt)
+detect_env_vars = ['VIRTUAL_ENV']
+

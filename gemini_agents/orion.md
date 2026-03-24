@@ -5,7 +5,7 @@ kind: local
 tools:
   - read_file
   - grep_search
-model: gemini-3.1-pro
+model: gemini-3.1-pro-preview
 temperature: 0.2
 max_turns: 10
 ---

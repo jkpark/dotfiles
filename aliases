@@ -36,3 +36,5 @@ alias gdall='git branch | grep -v "main" | xargs git branch -D'
 alias gm='git cd main'
 
 alias ts='tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux'
+
+alias lg='lazygit'

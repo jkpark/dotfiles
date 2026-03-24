@@ -8,9 +8,11 @@ echo "Ensuring target directory exists: $TARGET_DIR"
 mkdir -p "$TARGET_DIR"
 
 echo "Copying gemini agents..."
-for file in "$BASE/gemini_agents"/*; do
+for file in $BASE/gemini_agents/*; do
+    echo "$file"
     if [ -f "$file" ]; then
         filename=$(basename "$file")
         cp "$file" "$TARGET_DIR/$filename"
+        echo "copied $file".
     fi
 done

@@ -69,3 +69,4 @@ brew install mise
 appendStr ~/.bashrc 'eval "$(mise activate bashrc)'
 brew install tmux;
 ln -sfv $BASE/tmux.conf ~/.tmux.conf
+brew install lazygit
