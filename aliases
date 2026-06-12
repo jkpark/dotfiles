@@ -16,13 +16,10 @@ alias dw='cd ~/work'
 alias dl='cd ~/Downloads'
 
 alias sl='ls'
-alias ls='ls --color=auto'
-#lsd &> /dev/null && alias ls='lsd --group-dirs first'
-lsd &>/dev/null && alias ls='lsd'
+lsd &>/dev/null && alias ls='lsd' || alias ls='ls --color=auto'
 alias l='ls -alh'
 alias ll='ls -alh'
-alias lst='lsd --tree'
-alias slt='lsd --tree'
+lsd &>/dev/null && alias lst='lsd --tree' && alias slt='lsd --tree'
 
 alias mkdir='mkdir -pv'
 

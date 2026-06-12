@@ -21,11 +21,8 @@ Plug 'junegunn/seoul256.vim'
 " Enable trimming of trailing whitespace when uncommenting
 "let g:NERDTrimTrailingWhitespace = 1
 
-"Plug 'junegunn/goyo.vim'
-"Plug 'junegunn/limelight.vim'
-
 " command-line fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 
@@ -42,21 +39,16 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 let g:tagbar_sort = 0
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
 " Lint
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 let g:ale_sign_column_always = 1
 
 " git diff in the left side of window
 Plug 'airblade/vim-gitgutter'
-
-Plug 'haya14busa/incsearch.vim'
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
 
 call plug#end()
 
@@ -95,6 +87,7 @@ set shiftwidth=4            " Shift Width
 
 " Search Options
 set hlsearch                " highlighe searching  word
+set incsearch               " show match as you type
 set ignorecase              " ignore case when searching
 set nowrapscan              " no loop when searching
 set sm                      " show matches
@@ -124,12 +117,6 @@ cmap w!! w !sudo tee > /dev/null %
 " ----- disable indent when paste -----
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-function! XTermPasteBegin()
-	set pastetoggle=<Esc>[201~
-	set paste
-	return ""
-endfunction
 
 " ====================
 " Mappings
