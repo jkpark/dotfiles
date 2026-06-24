@@ -1,0 +1,5 @@
+
+brew install docker        # Docker CLI (무료, 오픈소스)
+brew install colima        # 컨테이너 실행 엔진 (무료, 오픈소스)
+brew services start colima
+docker run hello-world     # 정상 동작 확인
