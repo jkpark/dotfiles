@@ -35,3 +35,8 @@ alias gm='git cd main'
 alias ts='tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux'
 
 alias lg='lazygit'
+
+# nop: 프록시 없이 명령 실행 (no proxy). 예: nop gcloud auth login
+nop() {
+    HTTP_PROXY="" HTTPS_PROXY="" http_proxy="" https_proxy="" "$@"
+}

@@ -59,12 +59,12 @@ ln -sfv $BASE/zprofile ~/.zprofile
 
 brew install fzf
 brew install starship
+# mkdir -p ~/.config && ln -sfv "$BASE/starship.toml" "$HOME/.config/starship.toml"
 brew install mise
 
 # brew install fish 
 # mkdir -p "$HOME/.config/fish"
 # ln -sfv "$BASE/config.fish" "$HOME/.config/fish/config.fish"
-# ln -sfv "$BASE/starship.toml" "$HOME/.config/starship.toml"
 # fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
 # # Switch to using brew-installed fish as default shell
