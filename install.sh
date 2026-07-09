@@ -36,6 +36,10 @@ install_brew() {
 
 install_brew
 
+mkdir -p ~/.claude/commands
+ln -sfv "$BASE/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+ln -sfv "$BASE/.claude/commands/design-issue.md" ~/.claude/commands/design-issue.md
+
 ln -sfv "$BASE/gitconfig" ~/.gitconfig
 ln -sfv "$BASE/gitignore_global" ~/.gitignore_global
 ln -sfv $BASE/aliases ~/.aliases
